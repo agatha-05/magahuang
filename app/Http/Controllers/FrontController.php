@@ -34,22 +34,56 @@ class FrontController extends Controller
         // ->take(1)
         ->first();
 
-        $entertainment_articles = ArticleNews::whereHas('category', function ($query) {
-            $query->where('name', 'Entertainment');
+        $donghua_articles = ArticleNews::whereHas('category', function ($query) {
+            $query->where('name', 'Donghua');
         })
         ->where('is_featured','not_featured')
         ->latest()
         ->take(6)
         ->get();
 
-        $entertainment_featured_articles = ArticleNews::whereHas('category', function ($query) {
-            $query->where('name', 'Entertainment');
+        $donghua_featured_articles = ArticleNews::whereHas('category', function ($query) {
+            $query->where('name', 'Donghua');
         })
         ->where('is_featured','featured')
         ->inRandomOrder()
         ->first();
 
-        return view('front.index', compact('entertainment_featured_articles','entertainment_articles','categories', 'articles', 'authors', 'featured_articles', 'bannerads'));
+        $anime_articles = ArticleNews::whereHas('category', function ($query) {
+            $query->where('name', 'Anime');
+        })
+        ->where('is_featured','not_featured')
+        ->latest()
+        ->take(6)
+        ->get();
+
+        $anime_featured_articles = ArticleNews::whereHas('category', function ($query) {
+            $query->where('name', 'Anime');
+        })
+        ->where('is_featured','featured')
+        ->inRandomOrder()
+        ->first();
+
+        $film_articles = ArticleNews::whereHas('category', function ($query) {
+            $query->where('name', 'Film');
+        })
+        ->where('is_featured','not_featured')
+        ->latest()
+        ->take(6)
+        ->get();
+
+        $film_featured_articles = ArticleNews::whereHas('category', function ($query) {
+            $query->where('name', 'Film');
+        })
+        ->where('is_featured','featured')
+        ->inRandomOrder()
+        ->first();
+
+        
+
+        return view('front.index', compact('donghua_featured_articles','donghua_articles','anime_featured_articles','anime_articles', 'film_featured_articles','film_articles', 'categories',  'articles', 'authors', 'featured_articles', 'bannerads'));
+      
+        
     }
 
     public function category(Category $category){
@@ -85,7 +119,12 @@ class FrontController extends Controller
         $articles = ArticleNews::with(['category', 'author'])
         ->where('name', 'like', '%' . $keyword . '%')->paginate(6);
 
-        return view('front.search', compact('articles', 'keyword', 'categories'));
+        $trendingArticles = ArticleNews::with(['category', 'author'])
+            ->inRandomOrder() // Mengganti latest() dengan inRandomOrder()
+            ->take(6)
+            ->get();
+
+        return view('front.search', compact('articles', 'keyword', 'categories', 'trendingArticles'));
 
     }
 
@@ -128,5 +167,20 @@ class FrontController extends Controller
 
 
         return view('front.details', compact('author_news','square_ads_1','square_ads_2' ,'articleNews', 'categories', 'articles', 'bannerads'));
+    }
+
+    /**
+     * Menampilkan halaman Premium (tanpa data kategori untuk navbar yang lebih sederhana).
+     */
+    public function premium(){
+        // Menghapus pengambilan $categories sesuai permintaan.
+        
+        $bannerads = BannerAdvertisment::where('is_active','active')
+        ->where('type','banner')
+        ->inRandomOrder()
+        ->first(); // Ambil satu iklan banner
+
+        // Hanya meneruskan $bannerads ke view.
+        return view('front.premium', compact('bannerads'));
     }
 }

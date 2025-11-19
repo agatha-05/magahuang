@@ -5,19 +5,19 @@
 
 /* Track */
 .custom-scrollbar::-webkit-scrollbar-track {
-    background: rgba(238, 240, 247, 1); 
-    border: solid 2.5px white;
+    background: rgb(32, 35, 32); 
+    border: solid 2.5px rgb(43, 44, 42);
 }
 
 /* Handle */
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(255, 107, 24, 1);
+    background: rgb(237, 7, 222);
     border-radius: 3px;
 }
 
 /* Handle on hover */
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 107, 24, 1); 
+    background: rgb(40, 12, 223); 
 }
 
 #Content-wrapper{
@@ -68,11 +68,11 @@
 }
 
 #Content-wrapper ins{
-    color: #FF6B18;
+    color: #8c06f9;
 }
 
 #Content-wrapper a{
-    color: #FF6B18;
+    color: #10f63a;
 }
 
 #Content-wrapper a:hover{

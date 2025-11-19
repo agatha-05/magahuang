@@ -11,4 +11,8 @@ Route::get('/category/{category:slug}', [FrontController::class, 'category'])->n
 
 Route::get('/author/{author:slug}', [FrontController::class, 'author'])->name('front.author');
 
-Route::get('/search}', [FrontController::class, 'search'])->name('front.search');
+// Route untuk halaman Premium
+Route::get('/premium', [FrontController::class, 'premium'])->name('front.premium');
+
+// Perbaikan: Menghapus kurung kurawal yang salah pada '/search'
+Route::get('/search', [FrontController::class, 'search'])->name('front.search');

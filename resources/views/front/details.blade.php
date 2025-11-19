@@ -6,7 +6,7 @@
 	<nav id="Category" class="max-w-[1130px] mx-auto flex justify-center items-center gap-4 mt-[30px]">
 
         @foreach ($categories as $category)
-        <a href="{{ route('front.category', $category->slug) }}" class="rounded-full p-[12px_22px] flex gap-[10px] font-semibold transition-all duration-300 border border-[#EEF0F7] hover:ring-2 hover:ring-[#FF6B18]">
+        <a href="{{ route('front.category', $category->slug) }}" class="rounded-full p-[12px_22px] flex gap-[10px] font-semibold transition-all duration-300 border border-[#0f52ba] hover:ring-2 hover:ring-[#0f52ba]">
             <div class="flex w-6 h-6 shrink-0">
                 <img src="{{ Storage::url($category->icon) }}" alt="icon" />
             </div>
@@ -55,7 +55,7 @@
 							<img src="{{ asset('assets/images/icons/Star 1.svg') }}" alt="star">
 						</div>
 					</div>
-					<p class="font-semibold text-xs leading-[18px]">(12,490)</p>
+					<p class="font-semibold text-xs leading-[18px]">(18.105)</p>
 				</div>
 			</div>
 		</div>
@@ -125,8 +125,8 @@
 		<div class="max-w-[1130px] mx-auto flex flex-col gap-[30px]">
 			<div class="flex items-center justify-between">
 				<h2 class="font-bold text-[26px] leading-[39px]">
-					Other News You <br />
-					Might Be Interested
+					Berita Lain yang  <br />
+					Mungkin Menarik Bagi Anda
 				</h2>
 			</div>
 			<div class="grid grid-cols-3 gap-[30px]">
@@ -148,7 +148,7 @@
                                 {{ substr($article->name, 0, 55) }}{{ strlen($article->name) > 55 ? '...':''}}
                             </h3>
                             <p class="text-sm leading-[21px] text-[#A3A6AE]">
-                                {{ $article->created_at->format('M d, Y') }}
+                                {{ $article->created_at->format('D M, Y') }}
                             </p>
                         </div>
                     </div>
